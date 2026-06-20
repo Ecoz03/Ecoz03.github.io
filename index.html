@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--
+        Author: Jessie Sosniak
+        Date: 19 June 2026
+        Purpose: Build a personal homepage with navigation, project links,
+        a contact form, and personalized user interaction using JavaScript.
+    -->
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jessie Sosniak - Personal Homepage</title>
+
+    <!-- Internal CSS Styles -->
+    <style>
+        body {
+            background-color: #cfe8ff; /* light blue */
+            color: #002b5c; /* dark blue text */
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #80bfff;
+            padding: 20px;
+            text-align: center;
+            color: #002b5c;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        nav {
+            background-color: #99ccff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        nav a {
+            margin: 0 15px;
+            color: #002b5c;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        section {
+            padding: 20px;
+        }
+
+        h2, h3 {
+            color: #002b5c;
+        }
+
+        .project-img {
+            width: 250px;
+            height: 150px;
+            object-fit: cover;
+            border: 2px solid #002b5c;
+            margin: 10px 0 30px 0;
+            display: block;
+        }
+
+        button, input[type="submit"] {
+            background-color: #0066cc; /* blue buttons */
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover, input[type="submit"]:hover {
+            background-color: #004c99;
+        }
+
+        form input, form textarea {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border: 1px solid #004c99;
+        }
+
+        #welcomeMessage {
+            text-align: center;
+            padding: 15px;
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #002b5c;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Personalized welcome message inserted via JavaScript -->
+    <div id="welcomeMessage"></div>
+
+    <header>
+        Jessie Sosniak - Personal Homepage
+    </header>
+
+    <!-- Navigation Menu -->
+    <nav>
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <!-- ABOUT SECTION -->
+    <section id="about">
+        <h2>About Me</h2>
+        <p>
+            My name is Jessie Sosniak, and I am a Software Development student at ECPI.
+            I served in the US Navy as an IT, and I am excited to join the civilian
+            field of technology!
+        </p>
+    </section>
+
+    <!-- PROJECTS SECTION -->
+    <section id="projects">
+        <h2>Projects</h2>
+
+        <!-- Placeholder links for the src in the img lines -->
+        <!-- Project 1 -->
+        <h3>AI/Machine Learning and Advanced Data Analytics</h3>
+        <a href="https://github.com/Ecoz03/SDC486L-AI-ML-and-Advanced-Data-Analytics-Lab" target="_blank">
+            <img class="project-img" src="https://via.placeholder.com/250x150?text=AI+%2F+ML+Project" alt="AI ML Project">
+        </a>
+
+        <!-- Project 2 -->
+        <h3>Advanced Databases</h3>
+        <a href="https://github.com/Ecoz03/SDC435-Advanced-Databases" target="_blank">
+            <img class="project-img" src="https://via.placeholder.com/250x150?text=Database+Project" alt="Database Project">
+        </a>
+
+        <!-- Project 3 -->
+        <h3>Advanced OOP Using Java</h3>
+        <a href="https://github.com/Ecoz03/SDC330-Advanced-OOP-using-Java" target="_blank">
+            <img class="project-img" src="https://via.placeholder.com/250x150?text=Java+OOP+Project" alt="Java OOP Project">
+        </a>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact">
+        <h2>Contact Me</h2>
+
+        <!-- Contact Form -->
+        <form>
+            <label for="senderName">Your Name:</label>
+            <input type="text" id="senderName" required>
+
+            <label for="senderEmail">Your Email Address:</label>
+            <input type="email" id="senderEmail" required>
+
+            <label for="emailSubject">Subject:</label>
+            <input type="text" id="emailSubject" required>
+
+            <label for="emailMessage">Message:</label>
+            <textarea id="emailMessage" rows="5" required></textarea>
+
+            <input type="submit" value="Send Message">
+        </form>
+    </section>
+
+    <!-- JavaScript for Personalized Interaction -->
+    <script>
+        // Prompt user for their name
+        var userName = prompt("Welcome! What is your name?");
+
+        // Update welcome message dynamically
+        if (userName && userName.trim() !== "") {
+            document.getElementById("welcomeMessage").textContent =
+                "Welcome to my homepage, " + userName + "!";
+        } else {
+            document.getElementById("welcomeMessage").textContent =
+                "Welcome to my homepage!";
+        }
+    </script>
+
+</body>
+</html>
