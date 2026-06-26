@@ -3,9 +3,9 @@
 <head>
     <!--
         Author: Jessie Sosniak
-        Date: 19 June 2026
-        Purpose: Build a personal homepage with navigation, project links,
-        a contact form, and personalized user interaction using JavaScript.
+        Date: 26 June 2026
+        Purpose: Personal homepage with conditional logic, loops, dark mode,
+                 and interactive form behavior.
     -->
 
     <meta charset="UTF-8">
@@ -20,6 +20,13 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
+            transition: background-color 0.4s, color 0.4s;
+        }
+
+        /* Dark Mode Styles */
+        .dark-mode {
+            background-color: #2b2b2b; /* dark gray */
+            color: #9ecbff; /* light blue text */
         }
 
         header {
@@ -49,7 +56,7 @@
         }
 
         h2, h3 {
-            color: #002b5c;
+            color: inherit;
         }
 
         .project-img {
@@ -62,7 +69,7 @@
         }
 
         button, input[type="submit"] {
-            background-color: #0066cc; /* blue buttons */
+            background-color: #0066cc;
             color: white;
             padding: 10px 15px;
             border: none;
@@ -87,12 +94,84 @@
             padding: 15px;
             font-size: 1.3em;
             font-weight: bold;
-            color: #002b5c;
+        }
+
+        /* Featured Content Styling */
+        .featured-box {
+            border: 2px solid #002b5c;
+            padding: 15px;
+            margin-bottom: 20px;
+            background-color: #e6f2ff;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* Dark mode adjustments for boxes */
+        .dark-mode .featured-box {
+            background-color: #3a3a3a;
+            border-color: #9ecbff;
+        }
+
+        /* Toggle Switch Styling */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: 0.4s;
+            border-radius: 24px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: 0.4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: #0066cc;
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
         }
     </style>
 </head>
 
 <body>
+
+    <!-- Dark Mode Toggle -->
+    <div style="padding: 10px; text-align: right;">
+        <label class="switch">
+            <input type="checkbox" id="darkModeToggle">
+            <span class="slider"></span>
+        </label>
+        <span style="margin-left: 10px;">Dark Mode</span>
+    </div>
 
     <!-- Personalized welcome message inserted via JavaScript -->
     <div id="welcomeMessage"></div>
@@ -104,6 +183,7 @@
     <!-- Navigation Menu -->
     <nav>
         <a href="#about">About</a>
+        <a href="#featured">Featured Content</a>
         <a href="#projects">Projects</a>
         <a href="#contact">Contact</a>
     </nav>
@@ -116,29 +196,60 @@
             I served in the US Navy as an IT, and I am excited to join the civilian
             field of technology!
         </p>
+
+        <h3>My Skills</h3>
+        <ul id="skillsList"></ul>
+    </section>
+
+    <!-- FEATURED CONTENT SECTION -->
+    <section id="featured">
+        <h2>Featured Content</h2>
+
+        <!-- University Resources -->
+        <div id="universityResources" class="featured-box">
+            <h3>University Resources</h3>
+            <p>
+                <a href="https://www.ecpi.edu/virginia-beach-va/software-development" target="_blank">
+                    ECPI Software Development Program Homepage
+                </a>
+            </p>
+        </div>
+
+        <!-- Personal Projects -->
+        <div id="personalProjects" class="featured-box">
+            <h3>Personal Projects</h3>
+
+            <a href="https://github.com/Ecoz03/SDC486L-AI-ML-and-Advanced-Data-Analytics-Lab" target="_blank">
+                <img class="project-img" src="https://via.placeholder.com/250x150?text=AI+%2F+ML+Project">
+            </a>
+
+            <a href="https://github.com/Ecoz03/SDC435-Advanced-Databases" target="_blank">
+                <img class="project-img" src="https://via.placeholder.com/250x150?text=Database+Project">
+            </a>
+
+            <a href="https://github.com/Ecoz03/SDC330-Advanced-OOP-using-Java" target="_blank">
+                <img class="project-img" src="https://via.placeholder.com/250x150?text=Java+OOP+Project">
+            </a>
+        </div>
     </section>
 
     <!-- PROJECTS SECTION -->
     <section id="projects">
         <h2>Projects</h2>
 
-        <!-- Placeholder links for the src in the img lines -->
-        <!-- Project 1 -->
         <h3>AI/Machine Learning and Advanced Data Analytics</h3>
         <a href="https://github.com/Ecoz03/SDC486L-AI-ML-and-Advanced-Data-Analytics-Lab" target="_blank">
-            <img class="project-img" src="https://via.placeholder.com/250x150?text=AI+%2F+ML+Project" alt="AI ML Project">
+            <img class="project-img" src="https://via.placeholder.com/250x150?text=AI+%2F+ML+Project">
         </a>
 
-        <!-- Project 2 -->
         <h3>Advanced Databases</h3>
         <a href="https://github.com/Ecoz03/SDC435-Advanced-Databases" target="_blank">
-            <img class="project-img" src="https://via.placeholder.com/250x150?text=Database+Project" alt="Database Project">
+            <img class="project-img" src="https://via.placeholder.com/250x150?text=Database+Project">
         </a>
 
-        <!-- Project 3 -->
         <h3>Advanced OOP Using Java</h3>
         <a href="https://github.com/Ecoz03/SDC330-Advanced-OOP-using-Java" target="_blank">
-            <img class="project-img" src="https://via.placeholder.com/250x150?text=Java+OOP+Project" alt="Java OOP Project">
+            <img class="project-img" src="https://via.placeholder.com/250x150?text=Java+OOP+Project">
         </a>
     </section>
 
@@ -146,8 +257,7 @@
     <section id="contact">
         <h2>Contact Me</h2>
 
-        <!-- Contact Form -->
-        <form>
+        <form id="contactForm">
             <label for="senderName">Your Name:</label>
             <input type="text" id="senderName" required>
 
@@ -160,16 +270,14 @@
             <label for="emailMessage">Message:</label>
             <textarea id="emailMessage" rows="5" required></textarea>
 
-            <input type="submit" value="Send Message">
+            <input type="submit" id="submitBtn" value="Send Message">
         </form>
     </section>
 
-    <!-- JavaScript for Personalized Interaction -->
+    <!-- JavaScript -->
     <script>
-        // Prompt user for their name
+        // Personalized welcome message
         var userName = prompt("Welcome! What is your name?");
-
-        // Update welcome message dynamically
         if (userName && userName.trim() !== "") {
             document.getElementById("welcomeMessage").textContent =
                 "Welcome to my homepage, " + userName + "!";
@@ -177,6 +285,44 @@
             document.getElementById("welcomeMessage").textContent =
                 "Welcome to my homepage!";
         }
+
+        // Skills Loop
+        const skills = ["HTML", "CSS", "JavaScript", "Git", "GitHub", "Python"];
+        const skillsList = document.getElementById("skillsList");
+
+        skills.forEach(skill => {
+            let li = document.createElement("li");
+            li.textContent = skill;
+            skillsList.appendChild(li);
+        });
+
+        // Conditional Logic for Featured Content
+        const projectCount = document.querySelectorAll("#projects h3").length;
+        const universityDiv = document.getElementById("universityResources");
+        const personalDiv = document.getElementById("personalProjects");
+
+        if (projectCount < 3) {
+            universityDiv.classList.remove("hidden");
+            personalDiv.classList.remove("hidden");
+        } else {
+            universityDiv.classList.add("hidden");
+            personalDiv.classList.remove("hidden");
+        }
+
+        // Dark Mode Toggle
+        const darkToggle = document.getElementById("darkModeToggle");
+        darkToggle.addEventListener("change", function () {
+            document.body.classList.toggle("dark-mode");
+        });
+
+        // Form Interactivity
+        const form = document.getElementById("contactForm");
+        form.addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            const name = document.getElementById("senderName").value;
+            alert("Thank you, " + name + ", your message has been sent!");
+        });
     </script>
 
 </body>
