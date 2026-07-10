@@ -323,6 +323,59 @@
             const name = document.getElementById("senderName").value;
             alert("Thank you, " + name + ", your message has been sent!");
         });
+
+        /* ---------------------------------------------------------
+        1. Dynamically Add New Content to the About Me Section
+        --------------------------------------------------------- */
+        var aboutSection = document.getElementById("about");
+
+        var newParagraph = document.createElement("p");
+        newParagraph.textContent =
+            "I am currently working on enhancing my personal homepage using JavaScript. " +
+            "This project includes dynamic content creation, DOM manipulation, and timed interactions.";
+
+        aboutSection.appendChild(newParagraph);
+
+        /* ---------------------------------------------------------
+        2. Modify Existing Elements (Header, Nav, Welcome Message)
+        --------------------------------------------------------- */
+
+        // Apply typewriter-style font + slightly larger size
+        var header = document.querySelector("header");
+        var nav = document.querySelector("nav");
+
+        header.style.fontFamily = "Courier New, monospace";
+        nav.style.fontFamily = "Courier New, monospace";
+        welcome.style.fontFamily = "Courier New, monospace";
+
+        header.style.fontSize = "1.7em";
+        nav.style.fontSize = "1.2em";
+        welcome.style.fontSize = "1.4em";
+
+        /* ---------------------------------------------------------
+        3. Timed Confirmation for Contact Form Submission
+           (Will be seen below the form submission button.)
+        --------------------------------------------------------- */
+        var contactForm = document.querySelector("form");
+
+        contactForm.addEventListener("submit", function(event) {
+            event.preventDefault(); // stop default form behavior
+
+            // Create or update loading message
+            var statusMessage = document.getElementById("statusMessage");
+            if (!statusMessage) {
+                statusMessage = document.createElement("p");
+                statusMessage.id = "statusMessage";
+                contactForm.appendChild(statusMessage);
+            }
+
+            statusMessage.textContent = "Sending message...";
+
+            // Delay confirmation by 3 seconds
+            setTimeout(function() {
+                statusMessage.textContent = "Message sent successfully!";
+            }, 3000);
+        });
     </script>
 
 </body>
