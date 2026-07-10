@@ -347,23 +347,28 @@
         3. Timed Confirmation for Contact Form Submission
         --------------------------------------------------------- */
         var contactForm = document.getElementById("contactForm");
-    
+        var submitBtn = document.getElementById("submitBtn");
+        
         contactForm.addEventListener("submit", function(event) {
             event.preventDefault();
-    
+        
+            // Create or update loading/confirmation message ABOVE the submit button
             var statusMessage = document.getElementById("statusMessage");
             if (!statusMessage) {
                 statusMessage = document.createElement("p");
                 statusMessage.id = "statusMessage";
-                contactForm.appendChild(statusMessage);
+        
+                // Insert BEFORE the submit button
+                contactForm.insertBefore(statusMessage, submitBtn);
             }
-    
+        
             statusMessage.textContent = "Sending message...";
-    
+        
             setTimeout(function() {
                 statusMessage.textContent = "Message sent successfully!";
             }, 3000);
         });
+
     </script>
 
 
