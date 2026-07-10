@@ -285,22 +285,22 @@
             document.getElementById("welcomeMessage").textContent =
                 "Welcome to my homepage!";
         }
-
+    
         // Skills Loop
         const skills = ["HTML", "CSS", "JavaScript", "Git", "GitHub", "Python", "SQL", "Java", "AI/Machine Learning", "Data Analytics", "Network Administrator", "Security Administrator"];
         const skillsList = document.getElementById("skillsList");
-
+    
         skills.forEach(skill => {
             let li = document.createElement("li");
             li.textContent = skill;
             skillsList.appendChild(li);
         });
-
+    
         // Conditional Logic for Featured Content
         const projectCount = document.querySelectorAll("#projects h3").length;
         const universityDiv = document.getElementById("universityResources");
         const personalDiv = document.getElementById("personalProjects");
-
+    
         if (projectCount < 3) {
             universityDiv.classList.remove("hidden");
             personalDiv.classList.remove("hidden");
@@ -308,75 +308,64 @@
             universityDiv.classList.add("hidden");
             personalDiv.classList.remove("hidden");
         }
-
+    
         // Dark Mode Toggle
         const darkToggle = document.getElementById("darkModeToggle");
         darkToggle.addEventListener("change", function () {
             document.body.classList.toggle("dark-mode");
         });
-
-        // Form Interactivity
-        const form = document.getElementById("contactForm");
-        form.addEventListener("submit", function (event) {
-            event.preventDefault();
-
-            const name = document.getElementById("senderName").value;
-            alert("Thank you, " + name + ", your message has been sent!");
-        });
-
+    
         /* ---------------------------------------------------------
         1. Dynamically Add New Content to the About Me Section
         --------------------------------------------------------- */
         var aboutSection = document.getElementById("about");
-
+    
         var newParagraph = document.createElement("p");
         newParagraph.textContent =
             "I am currently working on enhancing my personal homepage using JavaScript. " +
             "This project includes dynamic content creation, DOM manipulation, and timed interactions.";
-
+    
         aboutSection.appendChild(newParagraph);
-
+    
         /* ---------------------------------------------------------
         2. Modify Existing Elements (Header, Nav, Welcome Message)
         --------------------------------------------------------- */
-
-        // Apply typewriter-style font + slightly larger size
+    
         var header = document.querySelector("header");
         var nav = document.querySelector("nav");
-
+        var welcome = document.getElementById("welcomeMessage");
+    
         header.style.fontFamily = "Courier New, monospace";
         nav.style.fontFamily = "Courier New, monospace";
         welcome.style.fontFamily = "Courier New, monospace";
-
+    
         header.style.fontSize = "1.7em";
         nav.style.fontSize = "1.2em";
         welcome.style.fontSize = "1.4em";
-
+    
         /* ---------------------------------------------------------
         3. Timed Confirmation for Contact Form Submission
-           (Will be seen below the form submission button.)
         --------------------------------------------------------- */
-        var contactForm = document.querySelector("form");
-
+        var contactForm = document.getElementById("contactForm");
+    
         contactForm.addEventListener("submit", function(event) {
-            event.preventDefault(); // stop default form behavior
-
-            // Create or update loading message
+            event.preventDefault();
+    
             var statusMessage = document.getElementById("statusMessage");
             if (!statusMessage) {
                 statusMessage = document.createElement("p");
                 statusMessage.id = "statusMessage";
                 contactForm.appendChild(statusMessage);
             }
-
+    
             statusMessage.textContent = "Sending message...";
-
-            // Delay confirmation by 3 seconds
+    
             setTimeout(function() {
                 statusMessage.textContent = "Message sent successfully!";
             }, 3000);
         });
     </script>
+
 
 </body>
 </html>
