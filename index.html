@@ -3,9 +3,8 @@
 <head>
     <!--
         Author: Jessie Sosniak
-        Date: 26 June 2026
-        Purpose: Personal homepage with conditional logic, loops, dark mode,
-                 and interactive form behavior.
+        Date: 19 July 2026
+        Purpose: Personal homepage, in progress.
     -->
 
     <meta charset="UTF-8">
@@ -159,6 +158,61 @@
         input:checked + .slider:before {
             transform: translateX(26px);
         }
+
+        /* Modal Styling */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5); /* transparent overlay */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        
+        .modal-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            width: 300px;
+        }
+        
+        .dark-mode .modal-content {
+            background-color: #3a3a3a;
+            color: #9ecbff;
+        }
+
+        /* Tooltip */
+        .tooltip {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            background-color: #004c99;
+            color: #fff;
+            text-align: center;
+            padding: 5px;
+            border-radius: 6px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+
     </style>
 </head>
 
@@ -176,6 +230,14 @@
     <!-- Personalized welcome message inserted via JavaScript -->
     <div id="welcomeMessage"></div>
 
+    <!-- Welcome Modal -->
+    <div id="welcomeModal" class="modal">
+        <div class="modal-content">
+            <p>This page is a work in progress.</p>
+            <button id="closeModalBtn">Close</button>
+        </div>
+    </div>
+    
     <header>
         Jessie Sosniak - Personal Homepage
     </header>
@@ -270,22 +332,27 @@
             <label for="emailMessage">Message:</label>
             <textarea id="emailMessage" rows="5" required></textarea>
 
-            <input type="submit" id="submitBtn" value="Send Message">
+            <div class="tooltip">
+                <input type="submit" id="submitBtn" value="Send Message">
+                <span class="tooltiptext">Click to send your message!</span>
+            </div>
         </form>
     </section>
 
     <!-- JavaScript -->
     <script>
-        // Personalized welcome message
-        var userName = prompt("Welcome! What is your name?");
-        if (userName && userName.trim() !== "") {
-            document.getElementById("welcomeMessage").textContent =
-                "Welcome to my homepage, " + userName + "!";
-        } else {
-            document.getElementById("welcomeMessage").textContent =
-                "Welcome to my homepage!";
-        }
-    
+        // Modal Logic
+        var modal = document.getElementById("welcomeModal");
+        var closeBtn = document.getElementById("closeModalBtn");
+        
+        // Show modal on page load
+        modal.style.display = "flex";
+        
+        // Close modal
+        closeBtn.addEventListener("click", function () {
+            modal.style.display = "none";
+        });
+
         // Skills Loop
         const skills = ["HTML", "CSS", "JavaScript", "Git", "GitHub", "Python", "SQL", "Java", "AI/Machine Learning", "Data Analytics", "Network Administrator", "Security Administrator"];
         const skillsList = document.getElementById("skillsList");
@@ -309,11 +376,26 @@
             personalDiv.classList.remove("hidden");
         }
     
-        // Dark Mode Toggle
+        // Dark Mode Toggle with Persistence
         const darkToggle = document.getElementById("darkModeToggle");
+        
+        // Load saved preference
+        if (localStorage.getItem("darkMode") === "enabled") {
+            document.body.classList.add("dark-mode");
+            darkToggle.checked = true;
+        }
+        
+        // Toggle dark mode
         darkToggle.addEventListener("change", function () {
             document.body.classList.toggle("dark-mode");
+        
+            if (document.body.classList.contains("dark-mode")) {
+                localStorage.setItem("darkMode", "enabled");
+            } else {
+                localStorage.setItem("darkMode", "disabled");
+            }
         });
+
     
         /* ---------------------------------------------------------
         1. Dynamically Add New Content to the About Me Section
